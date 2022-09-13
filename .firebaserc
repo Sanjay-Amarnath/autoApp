@@ -1,0 +1,9 @@
+{
+  "projects": {
+    "default": "autoapp-1d3ca",
+    "y": "autoapp-1d3ca",
+    "staging": "autoapp-1d3ca"
+  },
+  "targets": {},
+  "etags": {}
+}

@@ -1,0 +1,140 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+html,
+body {
+  padding: 0;
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
+    Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
+  background: #dfe9f5;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+.sign_page {
+  position: absolute;
+  left: 40%;
+  top: 30%;
+  width: 300px;
+}
+.sign_page input {
+  padding: 7px;
+  border-radius: 4px;
+  outline: none;
+  border: 1px solid #00000066;
+  margin: 0 0 8px 0;
+  width: 100%;
+}
+
+.sign_page p {
+  margin: 0 0 5px 0;
+}
+
+/* @media (prefers-color-scheme: dark) {
+  html {
+    color-scheme: dark;
+  }
+  body {
+    color: white;
+    background: black;
+  }
+} */
+
+.wrapper {
+  width: 330px;
+  padding: 2rem 0 1rem 0;
+  margin: 50px auto;
+  background: #fff;
+  border-radius: 10px;
+  text-align: center;
+  box-shadow: 0 20px 35px rgba(0, 0, 0, 0.1);
+  min-height: 550px;
+}
+.wrapper h1 {
+  font-size: 2rem;
+  color: #07001f;
+}
+
+.wrapper input {
+  width: 85%;
+  outline: none;
+  border: none;
+  background: #dfe9f5;
+  padding: 12px 14px;
+  margin-bottom: 10px;
+  border-radius: 10px;
+}
+.wrapper.recover {
+  text-align: right;
+  font-size: 0.8rem;
+  margin: 0.2rem 1.7rem 0 0;
+}
+.wrapper.recover a {
+  text-decoration: none;
+  color: #07001f;
+}
+.wrapper button {
+  font-size: 1.1rem;
+  margin-top: 1rem;
+  padding: 8px 0;
+  border-radius: 5px;
+  outline: none;
+  border: none;
+  width: 85%;
+  background: tomato;
+  color: #fff;
+  cursor: pointer;
+}
+.wrapper button:hover {
+  background: rgba(122, 30, 30, 0.767);
+}
+.wrapper .or {
+  font-size: 0.8rem;
+  margin-top: 1.5rem;
+}
+.wrapper .icons i {
+  color: #07001f;
+  padding: 00.8rem 1.5rem;
+  border-radius: 10px;
+  margin-left: 0.9rem;
+  font-size: 1.5rem;
+  cursor: pointer;
+  border: 2px solid #dfe9f5;
+}
+.wrapper .icons i:hover {
+  color: #fff !important;
+  background: #07001f;
+  transition: 1s;
+}
+.wrapper .icons i:first-child {
+  color: green;
+}
+.icons i:last-child {
+  color: blue;
+}
+.wrapper .not-member {
+  font-size: 0.8rem;
+  margin-top: 1.4rem;
+}
+.wrapper .not-member a {
+  color: tomato;
+  text-decoration: none;
+}
+.wrapper a:hover {
+  text-decoration: underline;
+}
+
+/* Daseboard */
+.div-container {
+  margin: auto;
+  height: 93vh;
+}
