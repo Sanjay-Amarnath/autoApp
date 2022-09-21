@@ -211,3 +211,36 @@ export const getAllFirebaseUserInfo = () => (dispatch) => {
     dispatch(getAlluserinfo(querySnapshot.docs));
   });
 };
+
+
+// sent The message
+export const sendMessage = async (msg, setMsg) => {
+  const { currentUser } = auth;
+
+  if (setMsg) {
+    setMsg("");
+  }
+
+  if (msg) {
+    try{
+      await addDoc(collection(db, "chat-rooms","OY8obOXjcFccXMUm8eBy",'messages'), {
+        uid: currentUser.uid,
+        name: currentUser.displayName,
+        email: currentUser.email,
+        message: msg.trim(), 
+      });
+    } catch (error) {
+      console.error(error)
+    }
+ 
+  }
+};
+
+// recived message
+export const recivedMessage =() => {
+
+  // try {
+  //   await addDoc(collection(db, "chat-rooms","OY8obOXjcFccXMUm8eBy",'messages') 
+  // }
+
+}
