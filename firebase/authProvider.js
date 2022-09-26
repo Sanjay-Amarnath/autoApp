@@ -21,11 +21,18 @@ import {
   orderBy,
   doc,
   updateDoc,
+  getDoc,
+  serverTimestamp,
 } from "firebase/firestore";
 import { getApp, initializeApp } from "firebase/app";
 import firebase from "firebase/app";
 import firebaseConfig from "./firebaseConfig";
-import { getAlluserinfo, getUserProfileinfo } from "../redux/activitySlice";
+import {
+  getAlluserinfo,
+  getRecivedMessage,
+  getSentMessage,
+  getUserProfileinfo,
+} from "../redux/activitySlice";
 import { getStorage, ref } from "firebase/storage";
 
 // FireBase
@@ -209,12 +216,12 @@ export const getAllFirebaseUserInfo = () => (dispatch) => {
   const q = query(collection(db, "users"));
   onSnapshot(q, (querySnapshot) => {
     dispatch(getAlluserinfo(querySnapshot.docs));
+    console.log(querySnapshot);
   });
 };
 
-
 // sent The message
-export const sendMessage = async (msg, setMsg) => {
+export const sendMessage = async (sender, reciver, msg, setMsg,reloadFunction) => {
   const { currentUser } = auth;
 
   if (setMsg) {
@@ -222,25 +229,56 @@ export const sendMessage = async (msg, setMsg) => {
   }
 
   if (msg) {
-    try{
-      await addDoc(collection(db, "chat-rooms","OY8obOXjcFccXMUm8eBy",'messages'), {
+    try {
+      await addDoc(collection(db, "chat-rooms", sender, reciver), {
         uid: currentUser.uid,
         name: currentUser.displayName,
         email: currentUser.email,
-        message: msg.trim(), 
+        message: msg,
+        timestamp: serverTimestamp(),
       });
+      reloadFunction()
     } catch (error) {
-      console.error(error)
+      console.error(error);
     }
- 
   }
 };
 
-// recived message
-export const recivedMessage =() => {
 
-  // try {
-  //   await addDoc(collection(db, "chat-rooms","OY8obOXjcFccXMUm8eBy",'messages') 
-  // }
+// send message
+export const getMessages = (sender, reciver) => (dispatch) => {
+  if (auth.currentUser) {
+    return onSnapshot(
+      query(
+        collection(db, "chat-rooms", sender, reciver),
+        orderBy("timestamp", "asc")
+      ),
+      (querySnapshot) => {
+        const messages = querySnapshot.docs.map((doc) => ({
+          id: doc.id,
+          ...doc.data(),
+        }));
+        dispatch(getSentMessage(messages));
+      }
+    );
+  } else console.log("rerender");
+};
 
-}
+//recived message
+export const recivedMessage = (sender, reciver) => (dispatch) => {
+  if (auth.currentUser) {
+    return onSnapshot(
+      query(
+        collection(db, "chat-rooms", reciver, sender),
+        orderBy("timestamp", "asc")
+      ),
+      (querySnapshot) => {
+        const messages = querySnapshot.docs.map((doc) => ({
+          id: doc.id,
+          ...doc.data(),
+        }));
+        dispatch(getRecivedMessage(messages));
+      }
+    );
+  } else console.log("rerender");
+};

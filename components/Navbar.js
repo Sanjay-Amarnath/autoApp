@@ -2,7 +2,7 @@
 import { Fragment, useState, useRef } from "react";
 import { Disclosure, Menu, Transition } from "@headlessui/react";
 import { BellIcon, MenuIcon, XIcon } from "@heroicons/react/outline";
-import {getFirebaseAuth, logout } from "../firebase/authProvider";
+import { getFirebaseAuth, logout } from "../firebase/authProvider";
 import { useRouter } from "next/router";
 import { useDispatch, useSelector } from "react-redux";
 import { userDataState } from "../redux/activitySlice";
@@ -10,6 +10,7 @@ import { useEffect } from "react";
 // open Pop UP
 import { Dialog } from "@headlessui/react";
 import { ExclamationIcon } from "@heroicons/react/outline";
+import Link from "next/link";
 
 const Navbar = () => {
   const [open, setOpen] = useState(false);
@@ -29,7 +30,6 @@ const Navbar = () => {
     { name: "Projects", href: "javascript:void(0)", current: false },
     { name: "Calendar", href: "javascript:void(0)", current: false },
   ];
-
 
   const [navDate, setNavData] = useState("Dashboard");
 
@@ -120,7 +120,7 @@ const Navbar = () => {
                         <img
                           className="h-8 w-8 rounded-full"
                           src={
-                          profileInfo?.photoURL
+                            profileInfo?.photoURL
                               ? profileInfo?.photoURL
                               : "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png"
                           }
@@ -141,6 +141,7 @@ const Navbar = () => {
                         <Menu.Item>
                           {({ active }) => (
                             <a
+                              href="/common/Profile"
                               className={classNames(
                                 active ? "bg-gray-100" : "",
                                 "block px-4 py-2 text-sm text-gray-700"

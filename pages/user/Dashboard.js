@@ -11,8 +11,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { userDataState } from "../../redux/activitySlice";
 
 function Demo() {
-
-  const router = useRouter()
+  const router = useRouter();
   const dispatch = useDispatch();
 
   const { userDetails, profileInfo } = useSelector(userDataState);
@@ -25,9 +24,12 @@ function Demo() {
     return i.data().uid !== profileInfo?.uid;
   });
 
-  const sendMsg =()=>{
-    router.push("/user/Message");
-  }
+  const sendMsg = (i) => {
+    router.push({
+      pathname: "/user/Message",
+      query: { keyword: i.data().name },
+    });
+  };
 
   return (
     <>
@@ -48,7 +50,7 @@ function Demo() {
                 <div className="p-2 text-center text-white flex justify-between">
                   <p>{i.data()?.name ?? i.data()?.email}</p>
                   <div>
-                    <SendIcon onClick={sendMsg}/>
+                    <SendIcon onClick={() => sendMsg(i)} />
                   </div>
                 </div>
               </div>

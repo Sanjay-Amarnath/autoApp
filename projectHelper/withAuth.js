@@ -22,7 +22,7 @@ const withAuth = (Component) => {
     }, [user]);
 
     // If user is not logged in, return login component
-
+    
     if (!user) {
       return <>{isLoading ? <Spinner /> : <Index />}</>;
     }

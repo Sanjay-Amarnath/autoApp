@@ -104,7 +104,6 @@ const ProfilePage = () => {
     updateUserProfile(updateInfo.name, uploadImg, setIsLoading, id);
   };
 
-  console.log(profileInfo)
 
   return (
     <>

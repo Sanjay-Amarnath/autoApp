@@ -138,3 +138,11 @@ a {
   margin: auto;
   height: 93vh;
 }
+
+.text_message {
+  margin: 0;
+  background: #dfe9f5;
+  color: #222d3b;
+  padding: 3px 16px;
+  border-radius: 10px;
+}
